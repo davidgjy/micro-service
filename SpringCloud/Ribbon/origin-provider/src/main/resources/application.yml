@@ -5,6 +5,7 @@ jdbc:
     password: mysql
 server:
   port: 8000
+  context-path: /origin-provider
 spring:
   application:
     name: origin-provider

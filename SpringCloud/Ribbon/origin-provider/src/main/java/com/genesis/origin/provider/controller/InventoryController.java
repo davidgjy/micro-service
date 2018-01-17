@@ -1,7 +1,7 @@
 package com.genesis.origin.provider.controller;
 
 import com.genesis.origin.provider.model.Inventory;
-import com.genesis.origin.provider.service.InventoryService;
+import com.genesis.origin.provider.service.impl.InventoryServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/inventory")
 public class InventoryController {
     @Autowired
-    private InventoryService inventoryService;
+    private InventoryServiceImpl inventoryServiceImpl;
 
     @ApiOperation(value = "根据id获取入库单")
     @GetMapping(value = "/getInventory")
     public Inventory getInventory(@RequestParam("id") Integer id) {
-        Inventory inventory = inventoryService.getInventory(id);
+        Inventory inventory = inventoryServiceImpl.getInventory(id);
 
         return inventory;
     }
