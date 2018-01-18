@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.genesis.origin.provider.mapper.InventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.genesis.origin.provider.model.Inventory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="purchase_date" property="purchaseDate" jdbcType="TIMESTAMP" />
+    <result column="settlement_id" property="settlementId" jdbcType="INTEGER" />
+    <result column="payment_id" property="paymentId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, goods_name, brand, unit, unit_price, quantity, supplier_id, purchase_date, settlement_id, 
+    payment_id, create_date, last_update
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.genesis.origin.provider.model.InventoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from inventory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inventory
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.genesis.origin.provider.model.InventoryExample" >
+    delete from inventory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.genesis.origin.provider.model.Inventory" >
+    insert into inventory (id, goods_name, brand, 
+      unit, unit_price, quantity, 
+      supplier_id, purchase_date, settlement_id, 
+      payment_id, create_date, last_update
+      )
+    values (#{id,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, 
+      #{supplierId,jdbcType=INTEGER}, #{purchaseDate,jdbcType=TIMESTAMP}, #{settlementId,jdbcType=INTEGER}, 
+      #{paymentId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.genesis.origin.provider.model.Inventory" >
+    insert into inventory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date,
+      </if>
+      <if test="settlementId != null" >
+        settlement_id,
+      </if>
+      <if test="paymentId != null" >
+        payment_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdate != null" >
+        last_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseDate != null" >
+        #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settlementId != null" >
+        #{settlementId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentId != null" >
+        #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null" >
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.genesis.origin.provider.model.InventoryExample" resultType="java.lang.Integer" >
+    select count(*) from inventory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update inventory
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierId != null" >
+        supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.purchaseDate != null" >
+        purchase_date = #{record.purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.settlementId != null" >
+        settlement_id = #{record.settlementId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentId != null" >
+        payment_id = #{record.paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null" >
+        last_update = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update inventory
+    set id = #{record.id,jdbcType=INTEGER},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      supplier_id = #{record.supplierId,jdbcType=INTEGER},
+      purchase_date = #{record.purchaseDate,jdbcType=TIMESTAMP},
+      settlement_id = #{record.settlementId,jdbcType=INTEGER},
+      payment_id = #{record.paymentId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.genesis.origin.provider.model.Inventory" >
+    update inventory
+    <set >
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="supplierId != null" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseDate != null" >
+        purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settlementId != null" >
+        settlement_id = #{settlementId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentId != null" >
+        payment_id = #{paymentId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null" >
+        last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.genesis.origin.provider.model.Inventory" >
+    update inventory
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+      settlement_id = #{settlementId,jdbcType=INTEGER},
+      payment_id = #{paymentId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
