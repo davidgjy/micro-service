@@ -1,0 +1,14 @@
+1. start microservice-discovery-eureka (8761) - discover
+2. start microservice-provider-user (8000) - provider
+3. start microservice-consumer-movie-ribbon (8010) - consumer1
+4. start microservice-gateway-zuul (8040) - gateway
+	(access http://localhost:8040/microservice-consumer-movie/user/1)
+	  -> transfer to http://localhost:8010/user/1
+	-------------------------------------------------------------------
+	(access http://localhost:8040/microservice-provider-user/1)
+	  -> transfer to http://localhost:8000/1
+
+	
+
+
+
