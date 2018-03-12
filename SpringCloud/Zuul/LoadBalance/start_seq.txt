@@ -1,0 +1,11 @@
+1. start microservice-discovery-eureka (8761) - discover
+2. start microservice-provider-user-1 (8000) - provider1
+3. start microservice-provider-user-2 (8001) - provider2
+4. start microservice-gateway-zuul (8040) - gateway
+	(多次访问 http://localhost:8040/microservice-provider-user/1)
+	  -> provider1和provider2项目都会有对应日志
+
+	
+
+
+
