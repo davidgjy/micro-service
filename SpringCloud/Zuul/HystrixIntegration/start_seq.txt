@@ -1,0 +1,14 @@
+1. start microservice-discovery-eureka (8761) - discover
+2. start microservice-provider-user (8000) - provider
+3. start microservice-consumer-movie-ribbon (8010) - consumer
+4. start microservice-gateway-zuul (8040) - gateway
+5. start microservice-hystrix-turbine (8031) - collection monitor	
+6. start microservice-hystrix-dashboard (8030) - dashboard
+   (url: http://localhost:8030/hystrix.stream
+    input box: http://localhost:8031/turbine.stream)
+7. 多次访问 http://localhost:8040/microservice-consumer-movie/user/1 
+	
+	
+
+
+
